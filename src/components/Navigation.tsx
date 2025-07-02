@@ -1,6 +1,8 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import SearchAutocomplete from '@/components/SearchAutocomplete';
+import type { SearchableItem } from '@/utils/searchUtils';
 
 interface NavigationProps {
   onSearch: (query: string) => void;
@@ -8,7 +10,6 @@ interface NavigationProps {
 
 const Navigation = ({ onSearch }: NavigationProps) => {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [searchQuery, setSearchQuery] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -37,10 +38,15 @@ const Navigation = ({ onSearch }: NavigationProps) => {
     localStorage.setItem('theme', newTheme);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchQuery(value);
-    onSearch(value);
+  const handleSearchSelect = (item: SearchableItem) => {
+    // Handle selection of autocomplete item
+    console.log('Selected item:', item);
+    
+    // Scroll to gallery section when item is selected
+    const galleryElement = document.getElementById('gallery');
+    if (galleryElement) {
+      galleryElement.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -99,29 +105,14 @@ const Navigation = ({ onSearch }: NavigationProps) => {
 
           {/* Search Bar and Theme Toggle */}
           <div className="flex items-center space-x-4">
-            {/* Search Bar */}
-            <div className="relative hidden sm:block">
-              <Input
-                type="text"
+            {/* Desktop Search Bar */}
+            <div className="hidden sm:block">
+              <SearchAutocomplete
+                onSearch={onSearch}
+                onSelectItem={handleSearchSelect}
+                className="w-48"
                 placeholder="search artwork..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="glass w-48 pl-10 pr-4 py-2 rounded-full border-0 focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground/70"
               />
-              <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
-                🔍
-              </div>
-              {searchQuery && (
-                <button
-                  onClick={() => {
-                    setSearchQuery('');
-                    onSearch('');
-                  }}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                >
-                  ✕
-                </button>
-              )}
             </div>
 
             {/* Theme Toggle */}
@@ -150,29 +141,11 @@ const Navigation = ({ onSearch }: NavigationProps) => {
 
         {/* Mobile Search Bar */}
         <div className="sm:hidden pb-4">
-          <div className="relative">
-            <Input
-              type="text"
-              placeholder="search artwork..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-              className="glass w-full pl-10 pr-4 py-2 rounded-full border-0 focus:ring-2 focus:ring-primary/50 placeholder:text-muted-foreground/70"
-            />
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground">
-              🔍
-            </div>
-            {searchQuery && (
-              <button
-                onClick={() => {
-                  setSearchQuery('');
-                  onSearch('');
-                }}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground"
-              >
-                ✕
-              </button>
-            )}
-          </div>
+          <SearchAutocomplete
+            onSearch={onSearch}
+            onSelectItem={handleSearchSelect}
+            placeholder="search artwork..."
+          />
         </div>
       </div>
     </nav>
