@@ -1,8 +1,10 @@
+
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Carousel3D from '@/components/Carousel3D';
 import CategoryGallery from '@/components/CategoryGallery';
+import ArtistProfile from '@/components/ArtistProfile';
 import CustomOrder from '@/components/CustomOrder';
 import Footer from '@/components/Footer';
 
@@ -20,6 +22,7 @@ const Index = () => {
         <Hero />
         <Carousel3D />
         <CategoryGallery searchQuery={searchQuery} />
+        <ArtistProfile />
         <CustomOrder />
         <Footer />
       </main>
