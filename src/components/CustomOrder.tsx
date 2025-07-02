@@ -4,17 +4,20 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { MessageCircle, Instagram, Phone, Mail, Smartphone } from 'lucide-react';
 
 const CustomOrder = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     description: '',
     size: '',
     deadline: '',
   });
   const [files, setFiles] = useState<File[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -54,42 +57,86 @@ const CustomOrder = () => {
 
   const generateMessage = () => {
     const filesList = files.length > 0 ? `\nReference Images: ${files.map(f => f.name).join(', ')}` : '';
-    return `Hello! I would like to request a custom art order.
+    return `🎨 Custom Art Order Request
 
 Name: ${formData.name}
 Email: ${formData.email}
-Description: ${formData.description}
-Size: ${formData.size || 'Not specified'}
-Deadline: ${formData.deadline || 'Flexible'}${filesList}
+${formData.phone ? `Phone: ${formData.phone}` : ''}
 
-Please let me know about pricing and timeline. Thank you!`;
+Artwork Description:
+${formData.description}
+
+Details:
+• Size: ${formData.size || 'Not specified'}
+• Deadline: ${formData.deadline || 'Flexible'}${filesList}
+
+Looking forward to creating something beautiful together!`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const getSMSBodyParam = () => {
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    return isIOS ? ';' : '?';
+  };
+
+  const generatePlatformURLs = () => {
+    const message = generateMessage();
+    const encodedMessage = encodeURIComponent(message);
     
+    return {
+      whatsapp: `https://wa.me/1234567890?text=${encodedMessage}`,
+      instagram: `https://ig.me/m/arvishwaart`,
+      sms: `sms:+1234567890${getSMSBodyParam()}body=${encodedMessage}`,
+      email: `mailto:vishwa@artstudio.com?subject=${encodeURIComponent('Custom Art Order Request')}&body=${encodedMessage}`
+    };
+  };
+
+  const handlePlatformLaunch = (platform: string) => {
     if (!formData.name || !formData.email || !formData.description) {
       alert('Please fill in all required fields');
       return;
     }
 
-    const message = generateMessage();
-    const encodedMessage = encodeURIComponent(message);
+    const urls = generatePlatformURLs();
     
-    // Replace with actual WhatsApp number
-    const whatsappNumber = "1234567890";
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    
-    const emailSubject = "Custom Art Order Request";
-    const emailBody = encodeURIComponent(message);
-    const emailUrl = `mailto:vishwa@example.com?subject=${encodeURIComponent(emailSubject)}&body=${emailBody}`;
-    
-    // Open both WhatsApp and email
-    window.open(whatsappUrl, '_blank');
-    setTimeout(() => {
-      window.location.href = emailUrl;
-    }, 1000);
+    switch (platform) {
+      case 'whatsapp':
+        window.open(urls.whatsapp, '_blank');
+        break;
+      case 'instagram':
+        window.open(urls.instagram, '_blank');
+        break;
+      case 'sms':
+        window.location.href = urls.sms;
+        break;
+      case 'email':
+        window.location.href = urls.email;
+        break;
+      default:
+        break;
+    }
   };
+
+  const getRecommendedPlatforms = () => {
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      return [
+        { platform: 'whatsapp', name: 'WhatsApp', icon: MessageCircle, priority: 1, reason: 'Instant messaging' },
+        { platform: 'sms', name: 'SMS', icon: Smartphone, priority: 2, reason: 'Universal mobile' },
+        { platform: 'instagram', name: 'Instagram', icon: Instagram, priority: 3, reason: 'Visual platform' },
+        { platform: 'email', name: 'Email', icon: Mail, priority: 4, reason: 'Formal communication' }
+      ];
+    } else {
+      return [
+        { platform: 'email', name: 'Email', icon: Mail, priority: 1, reason: 'Best for attachments' },
+        { platform: 'whatsapp', name: 'WhatsApp', icon: MessageCircle, priority: 2, reason: 'WhatsApp Web' },
+        { platform: 'instagram', name: 'Instagram', icon: Instagram, priority: 3, reason: 'Social engagement' },
+        { platform: 'sms', name: 'SMS', icon: Smartphone, priority: 4, reason: 'Limited on desktop' }
+      ];
+    }
+  };
+
+  const platforms = getRecommendedPlatforms();
 
   return (
     <section id="custom-order" className="py-20 bg-gradient-mesh">
@@ -117,11 +164,11 @@ Please let me know about pricing and timeline. Thank you!`;
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-primary font-bold">2.</span>
-                  <p>We'll provide a quote and timeline for your project</p>
+                  <p>Choose your preferred messaging platform below</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-primary font-bold">3.</span>
-                  <p>Once approved, we'll bring your vision to life</p>
+                  <p>We'll provide a quote and timeline for your project</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-primary font-bold">4.</span>
@@ -148,7 +195,7 @@ Please let me know about pricing and timeline. Thank you!`;
           </div>
 
           {/* Right Side - Order Form */}
-          <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-6">
+          <form className="glass rounded-2xl p-8 space-y-6">
             <h3 className="text-2xl font-handwritten font-bold text-foreground mb-6">
               Request Your Custom Art
             </h3>
@@ -183,6 +230,22 @@ Please let me know about pricing and timeline. Thank you!`;
                 required
                 className="glass border-0 focus:ring-2 focus:ring-primary/50"
                 placeholder="your.email@example.com"
+              />
+            </div>
+
+            {/* Phone */}
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-foreground font-medium">
+                Phone Number (Optional)
+              </Label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className="glass border-0 focus:ring-2 focus:ring-primary/50"
+                placeholder="+1 (555) 123-4567"
               />
             </div>
 
@@ -292,19 +355,35 @@ Please let me know about pricing and timeline. Thank you!`;
               )}
             </div>
 
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              size="lg"
-              className="w-full glass hover-glass transition-all duration-300 font-medium text-lg py-6 group"
-            >
-              <span className="mr-2 group-hover:animate-pulse">📱</span>
-              Send Request via WhatsApp & Email
-            </Button>
+            {/* Platform Selection */}
+            <div className="space-y-4">
+              <Label className="text-foreground font-medium">
+                Choose Your Preferred Contact Method
+              </Label>
+              <div className="grid grid-cols-2 gap-3">
+                {platforms.map(({ platform, name, icon: Icon, reason }) => (
+                  <Button
+                    key={platform}
+                    type="button"
+                    variant="outline"
+                    onClick={() => handlePlatformLaunch(platform)}
+                    className="glass hover-glass transition-all duration-300 h-auto p-4 flex flex-col items-center gap-2 group"
+                  >
+                    <Icon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
+                    <div className="text-center">
+                      <div className="font-medium text-foreground">{name}</div>
+                      <div className="text-xs text-muted-foreground">{reason}</div>
+                    </div>
+                  </Button>
+                ))}
+              </div>
+            </div>
 
-            <p className="text-xs text-muted-foreground text-center">
-              This will open WhatsApp and your email client with your request pre-filled
-            </p>
+            <div className="text-xs text-muted-foreground text-center space-y-1">
+              <p>📱 WhatsApp & SMS will open your messaging app</p>
+              <p>📧 Email will open your default email client</p>
+              <p>📷 Instagram will open direct messages (type manually)</p>
+            </div>
           </form>
         </div>
       </div>
