@@ -10,7 +10,7 @@
 @layer base {
   :root {
     /* Light Theme - Warm Creative Palette */
-    --background: 45 15% 96%;
+    --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
     /* Glassmorphic Design Tokens */
@@ -62,7 +62,7 @@
 
   [data-theme="dark"] {
     /* Dark Theme - Deep Creative Palette */
-    --background: 240 12% 8%;
+    --background: 0 0% 0%;
     --foreground: 210 40% 98%;
 
     /* Dark Glassmorphic Design Tokens */
@@ -72,14 +72,14 @@
     
     /* Dark Art Studio Colors */
     --primary: 280 85% 65%;          /* Bright Purple */
-    --primary-foreground: 240 12% 8%;
+    --primary-foreground: 0 0% 0%;
     --primary-glow: 280 100% 75%;
     
     --secondary: 35 90% 70%;         /* Bright Orange */
-    --secondary-foreground: 240 12% 8%;
+    --secondary-foreground: 0 0% 0%;
     
     --accent: 200 90% 65%;           /* Bright Blue */
-    --accent-foreground: 240 12% 8%;
+    --accent-foreground: 0 0% 0%;
     
     --artist-gold: 45 100% 70%;      /* Bright Gold */
     --artist-red: 355 90% 70%;       /* Bright Red */
@@ -118,12 +118,12 @@
 
   body {
     @apply bg-background text-foreground font-avenir transition-colors duration-300;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   /* Typography Classes - All Avenir */
   .font-avenir {
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .font-handwritten {
@@ -137,7 +137,7 @@
 
   /* Special title styling for homepage */
   .hero-title-mixed {
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .hero-title-mixed .brush-text {
@@ -149,6 +149,11 @@
     transform: rotate(-1deg);
     color: hsl(var(--primary));
     font-size: 1.2em;
+  }
+
+  /* Theme Transition */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
   /* Glassmorphic Components */
@@ -326,7 +331,7 @@
   .art-caption {
     text-align: center;
     margin: 0.5rem 0;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     color: hsl(var(--foreground));
     font-size: 0.9rem;
     font-weight: 500;
@@ -445,5 +450,29 @@
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  /* About Page Specific Styles */
+  .split-portrait {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .split-portrait:hover {
+    transform: scale(1.02);
+    box-shadow: 0 20px 60px hsl(var(--primary) / 0.2);
+  }
+
+  /* Button Focus States */
+  button:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Minimum tap target size for mobile */
+  @media (max-width: 768px) {
+    button {
+      min-height: 44px;
+      min-width: 44px;
+    }
   }
 }
