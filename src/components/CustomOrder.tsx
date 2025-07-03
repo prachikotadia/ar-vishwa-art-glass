@@ -83,10 +83,10 @@ Looking forward to creating something beautiful together!`;
     const encodedMessage = encodeURIComponent(message);
     
     return {
-      whatsapp: `https://wa.me/1234567890?text=${encodedMessage}`,
-      instagram: `https://ig.me/m/arvishwaart`,
-      sms: `sms:+1234567890${getSMSBodyParam()}body=${encodedMessage}`,
-      email: `mailto:vishwa@artstudio.com?subject=${encodeURIComponent('Custom Art Order Request')}&body=${encodedMessage}`
+      whatsapp: `https://wa.me/+919313042798?text=${encodedMessage}`,
+      instagram: `https://www.instagram.com/arvishwaartstudio/?igsh=MXMwNzVwam0wOTJ5OQ%3D%3D#`,
+      sms: `sms:+919313042798${getSMSBodyParam()}body=${encodedMessage}`,
+      email: `mailto:arvishwaartstudio@gmail.com ?subject=${encodeURIComponent('Custom Art Order Request')}&body=${encodedMessage}`
     };
   };
 
