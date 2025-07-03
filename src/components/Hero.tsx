@@ -44,7 +44,7 @@ const Hero = () => {
       {/* Floating logo */}
       <div className="absolute top-32 left-1/2 transform -translate-x-1/2 animate-float">
         <div className="w-20 h-20 glass rounded-full flex items-center justify-center">
-          <span className="text-2xl font-handwritten font-bold text-primary">AR</span>
+          <span className="text-2xl font-avenir font-bold text-primary">AR</span>
         </div>
       </div>
 
@@ -62,7 +62,7 @@ const Hero = () => {
         {/* Magic ink reveal title */}
         <div className="mb-8">
           <h1 
-            className={`text-5xl md:text-7xl font-handwritten font-bold text-foreground transition-all duration-3000 ${
+            className={`text-5xl md:text-7xl font-avenir font-bold text-foreground transition-all duration-3000 ${
               isRevealed ? 'animate-ink-reveal' : 'opacity-0'
             }`}
             style={{
@@ -75,14 +75,14 @@ const Hero = () => {
           >
             Where Colors Speak
           </h1>
-          <div className="text-3xl md:text-4xl font-handwritten mt-4 text-foreground/80">
+          <div className="text-3xl md:text-4xl font-avenir mt-4 text-foreground/80">
             AR Vishwa Art Studio
           </div>
         </div>
 
         {/* Enhanced Tagline with mixed typography */}
-        <p className="text-xl md:text-2xl font-opensans text-muted-foreground mb-12 animate-fade-in hero-title-mixed" style={{ animationDelay: '3s' }}>
-          Imbuing Life to Art, <span className="brush-text text-3xl md:text-4xl">One Stroke</span> at a Time
+        <p className="text-xl md:text-2xl font-avenir text-muted-foreground mb-12 animate-fade-in hero-title-mixed" style={{ animationDelay: '3s' }}>
+          Imbuing Life to Art, <span className="brush-text">One Stroke</span> at a Time
         </p>
 
         {/* CTA Buttons */}

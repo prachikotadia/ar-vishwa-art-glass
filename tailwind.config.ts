@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,9 +19,10 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				opensans: ['Open Sans', 'sans-serif'],
-				handwritten: ['Kalam', 'cursive'],
-				brush: ['Dancing Script', 'cursive'],
+				sans: ['Avenir', 'sans-serif'],
+				avenir: ['Avenir', 'sans-serif'],
+				handwritten: ['Brush Script MT', 'cursive'],
+				brush: ['Brush Script MT', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -95,11 +95,16 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'carousel-rotate': {
+					'0%': { transform: 'translateX(0)' },
+					'100%': { transform: 'translateX(-50%)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'carousel-rotate': 'carousel-rotate 20s linear infinite'
 			}
 		}
 	},
