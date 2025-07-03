@@ -1,7 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import heroArtwork from '@/assets/hero-artwork.jpg';
+import heroArtworkMobile from '@/assets/mobile view.png';
+import heroArtworkIpad from '@/assets/hero-artwork - Copy.jpg';
 
 const Hero = () => {
   const [isRevealed, setIsRevealed] = useState(false);
@@ -23,15 +24,16 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-mesh">
       {/* Background with parallax effect */}
-      <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `url(${heroArtwork})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-      />
+      <picture>
+        <source srcSet={heroArtworkMobile} media="(max-width: 768px)" />
+        <source srcSet={heroArtworkIpad} media="(min-width: 769px) and (max-width: 1024px)" />
+        <img
+          src={heroArtwork}
+          alt="Hero Artwork"
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          style={{ zIndex: 0 }}
+        />
+      </picture>
       
       {/* Floating background shapes */}
       <div className="absolute inset-0 overflow-hidden">
