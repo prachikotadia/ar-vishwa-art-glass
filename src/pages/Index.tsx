@@ -8,6 +8,7 @@ import ArtistProfile from '@/components/ArtistProfile';
 import VirtualStudioTour from '@/components/VirtualStudioTour';
 import CustomOrder from '@/components/CustomOrder';
 import Footer from '@/components/Footer';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,15 +19,31 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation onSearch={handleSearch} />
+      <ErrorBoundary>
+        <Navigation onSearch={handleSearch} />
+      </ErrorBoundary>
       <main>
-        <Hero />
-        <Carousel3D />
-        <CategoryGallery searchQuery={searchQuery} />
-        <ArtistProfile />
-        <VirtualStudioTour />
-        <CustomOrder />
-        <Footer />
+        <ErrorBoundary>
+          <Hero />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Carousel3D />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <CategoryGallery searchQuery={searchQuery} />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <ArtistProfile />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <VirtualStudioTour />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <CustomOrder />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Footer />
+        </ErrorBoundary>
       </main>
     </div>
   );

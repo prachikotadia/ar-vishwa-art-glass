@@ -1,84 +1,75 @@
 
-import { useInView } from 'react-intersection-observer';
-import Artist3D from './Artist3D';
-import Timeline from './Timeline';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Artist3DPlaceholder from '@/components/Artist3DPlaceholder';
 
 const ArtistProfile = () => {
-  const { ref: sectionRef, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
+  const achievements = [
+    { year: '2020', title: 'Featured Artist - Mumbai Art Gallery' },
+    { year: '2021', title: 'Best Contemporary Art - Regional Award' },
+    { year: '2022', title: 'Solo Exhibition - "Colors of Life"' },
+    { year: '2023', title: 'Art Residency - Creative Commons' },
+  ];
 
   return (
-    <section 
-      ref={sectionRef}
-      className="py-16 lg:py-24 relative overflow-hidden"
-      id="artist-journey"
-    >
-      {/* Background gradient mesh */}
-      <div className="bg-gradient-mesh absolute inset-0 opacity-30" />
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className={`glass-strong rounded-3xl p-6 lg:p-12 transition-all duration-1000 ${
-          inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}>
-          {/* Section header */}
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="text-4xl lg:text-6xl font-handwritten text-foreground mb-4 animate-ink-reveal">
-              The Artistic Journey of Vishwa Patel
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Explore the milestones, achievements, and creative evolution that shaped my artistic vision
-            </p>
+    <section className="py-20 bg-gradient-mesh">
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Artist 3D Model */}
+          <div className="order-2 lg:order-1">
+            <Artist3DPlaceholder />
           </div>
-          
-          {/* Main content grid */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            {/* Timeline section */}
-            <div className="order-2 lg:order-1">
-              <h3 className="text-2xl font-handwritten text-foreground mb-8">
-                Career Milestones
-              </h3>
-              <Timeline />
+
+          {/* Artist Info */}
+          <div className="order-1 lg:order-2 space-y-8">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-handwritten font-bold text-foreground mb-4">
+                Meet the Artist
+              </h2>
+              <div className="space-y-4 text-muted-foreground">
+                <p className="text-lg leading-relaxed">
+                  Welcome to AR Vishwa Art Studio, where passion meets creativity. With over a decade 
+                  of experience in various art forms, I specialize in bringing emotions to life through 
+                  vibrant colors and meaningful compositions.
+                </p>
+                <p>
+                  My journey began with traditional techniques and has evolved to embrace contemporary 
+                  styles, always maintaining the core belief that art should speak to the soul.
+                </p>
+              </div>
             </div>
-            
-            {/* 3D Artist model section */}
-            <div className="order-1 lg:order-2 space-y-6">
-              <div className="text-center lg:text-left">
-                <h3 className="text-2xl font-handwritten text-foreground mb-4">
-                  Meet the Artist
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Interact with the 3D model below - rotate, zoom, and explore from every angle
-                </p>
+
+            {/* Achievements Timeline */}
+            <Card className="glass p-6">
+              <h3 className="text-2xl font-handwritten font-bold text-foreground mb-6">
+                Milestones & Recognition
+              </h3>
+              <div className="space-y-4">
+                {achievements.map((achievement, index) => (
+                  <div key={index} className="flex items-start gap-4 group">
+                    <div className="w-16 h-8 bg-primary/20 rounded-full flex items-center justify-center text-sm font-medium text-primary group-hover:bg-primary/30 transition-colors">
+                      {achievement.year}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-foreground font-medium group-hover:text-primary transition-colors">
+                        {achievement.title}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <Artist3D 
-                modelPath="/models/artist.glb"
-                staticImagePath="/images/artist-3d.jpg"
-                autoRotate={true}
-              />
-              
-              <div className="text-center">
-                <p className="text-sm text-muted-foreground">
-                  Click and drag to rotate • Scroll to zoom • Auto-rotates when idle
-                </p>
-              </div>
-              
-              {/* Artist description */}
-              <div className="glass rounded-xl p-6 space-y-4">
-                <h4 className="font-semibold text-foreground">About Vishwa Patel</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  A passionate artist dedicated to bridging traditional techniques with contemporary expression. 
-                  My work explores the intersection of classical artistry and modern digital innovation, 
-                  creating pieces that resonate with both timeless beauty and cutting-edge creativity.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full">Portrait Artist</span>
-                  <span className="px-3 py-1 bg-secondary/20 text-secondary text-xs rounded-full">Mixed Media</span>
-                  <span className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full">Digital Art</span>
-                </div>
-              </div>
+            </Card>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="glass hover-glass">
+                <span className="mr-2">🎨</span>
+                View Portfolio
+              </Button>
+              <Button size="lg" variant="secondary" className="glass hover-glass">
+                <span className="mr-2">📞</span>
+                Schedule Consultation
+              </Button>
             </div>
           </div>
         </div>
