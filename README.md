@@ -11,17 +11,7 @@
 * Art Collection with folder-style navigation
 * Integrated contact options (Gmail, WhatsApp, SMS, Instagram)
 
-## 🚀 Tech Stack
 
-* HTML
-* CSS
-* JavaScript
 
-## 📦 Setup
 
-```bash
-git clone https://github.com/yourusername/vishwa-art-studio.git
-cd vishwa-art-studio
-# open index.html in your browser
-```
 
