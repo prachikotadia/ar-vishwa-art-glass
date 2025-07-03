@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import heroArtwork from '@/assets/hero-artwork.jpg';
@@ -79,9 +80,9 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Tagline */}
-        <p className="text-xl md:text-2xl font-poppins text-muted-foreground mb-12 animate-fade-in" style={{ animationDelay: '3s' }}>
-          Imbuing Life to Art, One Stroke at a Time
+        {/* Enhanced Tagline with mixed typography */}
+        <p className="text-xl md:text-2xl font-opensans text-muted-foreground mb-12 animate-fade-in hero-title-mixed" style={{ animationDelay: '3s' }}>
+          Imbuing Life to Art, <span className="brush-text text-3xl md:text-4xl">One Stroke</span> at a Time
         </p>
 
         {/* CTA Buttons */}
