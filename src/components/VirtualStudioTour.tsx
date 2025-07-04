@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapPin, Video, Navigation, Clock, Phone, Mail } from 'lucide-react';
+import demoStudioVideo from '@/assets/demo_studio.mp4';
 
 const VirtualStudioTour = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -134,9 +134,14 @@ const VirtualStudioTour = () => {
                   ))}
                 </>
               ) : (
-                <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                  <p className="text-muted-foreground">Virtual tour video would play here</p>
-                </div>
+                <video
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src={demoStudioVideo}
+                  controls
+                  autoPlay
+                  playsInline
+                  onEnded={() => setIsVideoPlaying(false)}
+                />
               )}
             </div>
           </Card>

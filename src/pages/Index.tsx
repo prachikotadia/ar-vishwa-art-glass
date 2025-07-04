@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
@@ -9,6 +8,7 @@ import VirtualStudioTour from '@/components/VirtualStudioTour';
 import CustomOrder from '@/components/CustomOrder';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import About from './About';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,6 +25,9 @@ const Index = () => {
       <main>
         <ErrorBoundary>
           <Hero />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <About />
         </ErrorBoundary>
         <ErrorBoundary>
           <Carousel3D />

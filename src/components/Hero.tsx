@@ -26,7 +26,7 @@ const Hero = () => {
       {/* Background with parallax effect */}
       <picture>
         <source srcSet={heroArtworkMobile} media="(max-width: 768px)" />
-        <source srcSet={heroArtworkIpad} media="(min-width: 769px) and (max-width: 1024px)" />
+        <source srcSet={heroArtworkIpad} media="(min-width: 769px) and (max-width: 1366px)" />
         <img
           src={heroArtwork}
           alt="Hero Artwork"

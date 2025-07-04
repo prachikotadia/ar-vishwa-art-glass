@@ -1,7 +1,7 @@
-
 import Timeline from '@/components/Timeline';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import halfPortrait from '@/assets/halfportrait.png';
 
 const About = () => {
   const scrollToSection = (sectionId: string) => {
@@ -23,7 +23,7 @@ const About = () => {
               {/* Split Portrait */}
               <div className="w-full max-w-sm mx-auto">
                 <img
-                  src="/lovable-uploads/b7936043-39bc-4768-a581-922b48f91e94.png"
+                  src={halfPortrait}
                   alt="Half realistic, half painted creative portrait of AR Vishwa"
                   className="w-full h-auto object-cover rounded-2xl shadow-2xl"
                   loading="lazy"
@@ -81,7 +81,7 @@ const About = () => {
               <div className="flex justify-center">
                 <div className="relative">
                   <img
-                    src="/lovable-uploads/b7936043-39fb-4768-a581-922b48f91e94.png"
+                    src={halfPortrait}
                     alt="Half realistic, half painted creative portrait of AR Vishwa"
                     className="w-80 h-80 xl:w-96 xl:h-96 object-cover rounded-2xl shadow-2xl"
                     loading="lazy"
