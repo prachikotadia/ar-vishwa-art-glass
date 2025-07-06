@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
@@ -10,7 +9,6 @@ import CustomOrder from '@/components/CustomOrder';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import About from './About';
-import ChatSystem from '@/components/ChatSystem';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -50,11 +48,6 @@ const Index = () => {
           <Footer />
         </ErrorBoundary>
       </main>
-      
-      {/* Chat System */}
-      <ErrorBoundary>
-        <ChatSystem currentPage="home" />
-      </ErrorBoundary>
     </div>
   );
 };
