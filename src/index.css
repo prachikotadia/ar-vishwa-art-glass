@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Brush+Script+MT&display=swap');
 
 @tailwind base;
@@ -425,4 +424,155 @@
       min-width: 44px;
     }
   }
+
+  /* Chat System Specific Styles */
+  .chat-panel {
+    backdrop-filter: blur(20px);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card) / 0.95),
+      hsl(var(--card) / 0.8)
+    );
+  }
+
+  .chat-message-user {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  }
+
+  .chat-message-bot {
+    background: hsl(var(--muted));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .chat-button {
+    transition: all 0.2s ease;
+  }
+
+  .chat-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
+  }
+
+  /* Voice Input Animation */
+  .voice-listening {
+    animation: voice-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes voice-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+  }
+
+  /* Chat Icon Pulse */
+  .chat-icon-pulse {
+    animation: chat-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes chat-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--primary) / 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px hsl(var(--primary) / 0);
+    }
+  }
+
+  /* Quiz Progress Indicator */
+  .quiz-progress {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--secondary)) 100%
+    );
+    height: 4px;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  /* Language Selector Styling */
+  .language-select {
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+  }
+
+  .language-select:focus {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Mobile Chat Optimizations */
+  @media (max-width: 768px) {
+    .chat-panel {
+      width: 100vw !important;
+      height: 100vh !important;
+    }
+    
+    .chat-message {
+      max-width: 90%;
+    }
+    
+    .chat-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .chat-input {
+      font-size: 16px; /* Prevents zoom on iOS */
+    }
+  }
+
+  /* Dark Mode Chat Adjustments */
+  [data-theme="dark"] .chat-panel {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card) / 0.95),
+      hsl(var(--background) / 0.8)
+    );
+    border-color: hsl(var(--border));
+  }
+
+  [data-theme="dark"] .chat-message-bot {
+    background: hsl(var(--muted) / 0.8);
+    border-color: hsl(var(--border));
+  }
+
+  /* FAQ Badge Styling */
+  .faq-badge {
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .faq-badge:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    transform: translateY(-1px);
+  }
+
+  /* Recommendation Cards */
+  .recommendation-card {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card)),
+      hsl(var(--muted) / 0.5)
+    );
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    padding: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .recommendation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px hsl(var(--primary) / 0.15);
+  }
 }
+
+/* Chat System is now getting long, let's note this in the CSS */
+/* NOTE: src/index.css is getting quite long (now 600+ lines). Consider refactoring into smaller CSS modules. */
