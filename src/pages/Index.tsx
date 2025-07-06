@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
@@ -8,6 +9,7 @@ import VirtualStudioTour from '@/components/VirtualStudioTour';
 import CustomOrder from '@/components/CustomOrder';
 import Footer from '@/components/Footer';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import ChatBot from '@/components/ChatBot';
 import About from './About';
 
 const Index = () => {
@@ -19,6 +21,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ErrorBoundary>
+        <ChatBot />
+      </ErrorBoundary>
       <ErrorBoundary>
         <Navigation onSearch={handleSearch} />
       </ErrorBoundary>

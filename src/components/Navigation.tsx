@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import SearchAutocomplete from '@/components/SearchAutocomplete';
@@ -58,22 +59,21 @@ const Navigation = ({ onSearch }: NavigationProps) => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled ? 'glass-strong backdrop-blur-lg' : 'bg-transparent'
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <div 
-              className="flex items-center space-x-2 cursor-pointer group"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              <div className="w-10 h-10 glass rounded-full flex items-center justify-center group-hover:animate-pulse">
-                <span className="text-lg font-handwritten font-bold text-primary">AR</span>
+            {/* Brand Name - Centered for mobile, left for desktop */}
+            <div className="flex-1 flex justify-center md:justify-start">
+              <div 
+                className="cursor-pointer group"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                <span className="font-handwritten font-bold text-xl md:text-2xl text-foreground hover:text-primary transition-colors">
+                  Vishwa Art Studio
+                </span>
               </div>
-              <span className="hidden sm:block font-handwritten font-bold text-xl text-foreground">
-                Vishwa Art Studio
-              </span>
             </div>
 
             {/* Desktop Navigation Links */}
@@ -139,6 +139,7 @@ const Navigation = ({ onSearch }: NavigationProps) => {
           </div>
         </div>
       </nav>
+      
       {/* Mobile Bottom Navigation Bar */}
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-[95vw] max-w-md md:hidden">
         <div className="glass backdrop-blur-lg rounded-full flex justify-around items-center py-3 px-2 shadow-lg">
