@@ -15,17 +15,13 @@ import About from './About';
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-24">
       <ErrorBoundary>
         <ChatBot />
       </ErrorBoundary>
       <ErrorBoundary>
-        <Navigation onSearch={handleSearch} />
+        <Navigation />
       </ErrorBoundary>
       <main>
         <ErrorBoundary>
