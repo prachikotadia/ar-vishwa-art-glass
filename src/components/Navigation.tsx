@@ -1,8 +1,14 @@
-
 import { User, Image, ShoppingBag, Phone } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
+import SearchBar from './SearchBar';
+import ThemeToggle from './ThemeToggle';
 
-const Navigation = () => {
+interface NavigationProps {
+  searchQuery: string;
+  setSearchQuery: (q: string) => void;
+}
+
+const Navigation = ({ searchQuery, setSearchQuery }: NavigationProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -45,38 +51,12 @@ const Navigation = () => {
   ];
 
   return (
-    <nav className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="glass backdrop-blur-lg rounded-full px-6 py-3 shadow-lg border border-white/20">
-        <div className="flex items-center space-x-8">
-          {navigationItems.map(({ id, icon: Icon, label, onClick, isActive }) => (
-            <button
-              key={id}
-              onClick={onClick}
-              className={`
-                flex flex-col items-center justify-center
-                min-w-[48px] min-h-[48px] p-2
-                transition-all duration-300 ease-in-out
-                hover:scale-110 hover:bg-white/10 rounded-lg
-                focus:outline-none focus:ring-2 focus:ring-primary/50
-                ${isActive ? 'text-primary' : 'text-foreground hover:text-primary'}
-              `}
-              aria-label={`Go to ${label} section`}
-            >
-              <Icon 
-                className={`
-                  w-5 h-5 mb-1 transition-all duration-300
-                  ${isActive ? 'text-primary' : 'text-foreground'}
-                `}
-              />
-              <span className={`
-                text-xs font-medium transition-all duration-300
-                ${isActive ? 'text-primary' : 'text-foreground'}
-              `}>
-                {label}
-              </span>
-            </button>
-          ))}
-        </div>
+    <nav className="fixed top-0 left-0 w-full z-40 flex justify-center items-center px-2 py-3 bg-transparent pointer-events-none">
+      <div className="w-full max-w-2xl mx-auto pointer-events-auto flex justify-center">
+        <SearchBar value={searchQuery} onChange={e => setSearchQuery(e.target.value)} />
+      </div>
+      <div className="fixed top-4 right-4 z-50 pointer-events-auto">
+        <ThemeToggle />
       </div>
     </nav>
   );

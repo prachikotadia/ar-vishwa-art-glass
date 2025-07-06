@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { X, Send, MessageCircle, Mail, Calendar, ShoppingBag, HelpCircle, Image } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -149,7 +148,7 @@ Sent automatically from AR Vishwa Art Studio website
       {/* Chat Icon Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed top-4 left-4 z-50 w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 group animate-pulse-glow"
+        className="fixed top-4 left-4 z-[999] w-12 h-12 md:w-14 md:h-14 glass rounded-full flex items-center justify-center hover:scale-110 transition-all duration-300 group animate-pulse-glow"
         aria-label="Open chat assistant"
       >
         <MessageCircle className="w-6 h-6 md:w-7 md:h-7 text-primary group-hover:text-primary/80 transition-colors" />
@@ -162,7 +161,7 @@ Sent automatically from AR Vishwa Art Studio website
 
       {/* Chat Panel */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm">
           {/* Desktop: Side Panel, Mobile: Full Screen */}
           <div className={`
             fixed top-0 right-0 h-full w-full md:w-96 lg:w-[28rem]

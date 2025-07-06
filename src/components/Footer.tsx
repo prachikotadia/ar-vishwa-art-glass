@@ -1,3 +1,5 @@
+import ContactIcons from './ContactIcons';
+
 const Footer = () => {
   const email = 'arvishwaartstudio@gmail.com ';
   const phone = '+919313042798';

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
@@ -21,7 +20,7 @@ const Index = () => {
         <ChatBot />
       </ErrorBoundary>
       <ErrorBoundary>
-        <Navigation />
+        <Navigation searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </ErrorBoundary>
       <main>
         <ErrorBoundary>

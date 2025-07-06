@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import acrylicImg from '@/assets/categories/acrylic-1.jpg';
@@ -162,11 +162,19 @@ const CategoryGallery = ({ searchQuery = '' }: CategoryGalleryProps) => {
   const [openFolder, setOpenFolder] = useState<string | null>(null);
   const [modalImage, setModalImage] = useState<any>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const firstMatchRef = useRef<HTMLDivElement | null>(null);
 
   const filteredCategories = categories.filter(category =>
     category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     category.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Scroll first match into view on search
+  useEffect(() => {
+    if (searchQuery && firstMatchRef.current) {
+      firstMatchRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [searchQuery]);
 
   const handleCategoryClick = (categoryName: string) => {
     if (openFolder === categoryName) {
@@ -249,66 +257,75 @@ const CategoryGallery = ({ searchQuery = '' }: CategoryGalleryProps) => {
         {/* Main Categories View */}
         {!openFolder && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {filteredCategories.map((category, index) => (
-              <div
-                key={category.name}
-                className={`glass hover-glass hover-scale transition-all duration-300 rounded-2xl p-6 cursor-pointer group ${
-                  searchQuery && category.name.toLowerCase().includes(searchQuery.toLowerCase()) 
-                    ? 'ring-2 ring-primary animate-pulse-glow' 
-                    : ''
-                }`}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                onClick={() => handleCategoryClick(category.name)}
-              >
-                {/* Folder Preview Images with better spacing */}
-                <div className="relative mb-4 h-40">
-                  <div 
-                    className={`absolute top-0 left-0 w-full h-32 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
-                      hoveredCard === index ? 'transform rotate-2 translate-x-2' : 'transform rotate-1'
-                    }`}
-                  >
-                    <img
-                      src={category.images[0]}
-                      alt={`${category.name} sample 1`}
-                      className="w-full h-full object-cover"
-                    />
+            {categories.map((category, index) => {
+              const isMatch =
+                searchQuery &&
+                (category.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  category.description.toLowerCase().includes(searchQuery.toLowerCase()));
+              const isFirstMatch =
+                isMatch &&
+                categories.findIndex(cat =>
+                  searchQuery &&
+                  (cat.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    cat.description.toLowerCase().includes(searchQuery.toLowerCase()))
+                ) === index;
+              return (
+                <div
+                  key={category.name}
+                  ref={isFirstMatch ? firstMatchRef : null}
+                  className={`glass hover-glass hover-scale transition-all duration-300 rounded-2xl p-6 cursor-pointer group
+                    ${isMatch ? 'ring-2 ring-primary animate-pulse-glow' : ''}
+                    ${searchQuery && !isMatch ? 'opacity-40 grayscale pointer-events-none' : ''}
+                  `}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  onClick={() => handleCategoryClick(category.name)}
+                >
+                  {/* Folder Preview Images with better spacing */}
+                  <div className="relative mb-4 h-40">
+                    <div 
+                      className={`absolute top-0 left-0 w-full h-32 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
+                        hoveredCard === index ? 'transform rotate-2 translate-x-2' : 'transform rotate-1'
+                      }`}
+                    >
+                      <img
+                        src={category.images[0]}
+                        alt={`${category.name} sample 1`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div 
+                      className={`absolute top-8 right-4 w-full h-32 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
+                        hoveredCard === index ? 'transform -rotate-2 -translate-x-2' : 'transform -rotate-1'
+                      }`}
+                    >
+                      <img
+                        src={category.images[1]}
+                        alt={`${category.name} sample 2`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute top-0 left-4 w-20 h-6 bg-primary/20 rounded-t-lg border-t border-l border-r border-primary/30" />
                   </div>
-                  
-                  <div 
-                    className={`absolute top-8 right-4 w-full h-32 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
-                      hoveredCard === index ? 'transform -rotate-2 -translate-x-2' : 'transform -rotate-1'
-                    }`}
-                  >
-                    <img
-                      src={category.images[1]}
-                      alt={`${category.name} sample 2`}
-                      className="w-full h-full object-cover"
-                    />
+                  {/* Category Info */}
+                  <div className="text-center">
+                    <h3 className="text-xl font-avenir font-bold text-foreground mb-2">
+                      {category.name}
+                    </h3>
+                    <p className="text-sm font-avenir text-muted-foreground mb-3">
+                      {category.description}
+                    </p>
+                    <div className="flex items-center justify-center gap-2 text-sm text-primary font-avenir">
+                      <span>📁</span>
+                      <span>{category.count} files</span>
+                    </div>
                   </div>
-
-                  <div className="absolute top-0 left-4 w-20 h-6 bg-primary/20 rounded-t-lg border-t border-l border-r border-primary/30" />
+                  <div className={`absolute inset-0 bg-primary/10 rounded-2xl transition-opacity duration-300 ${
+                    hoveredCard === index ? 'opacity-100' : 'opacity-0'
+                  }`} />
                 </div>
-
-                {/* Category Info */}
-                <div className="text-center">
-                  <h3 className="text-xl font-avenir font-bold text-foreground mb-2">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm font-avenir text-muted-foreground mb-3">
-                    {category.description}
-                  </p>
-                  <div className="flex items-center justify-center gap-2 text-sm text-primary font-avenir">
-                    <span>📁</span>
-                    <span>{category.count} files</span>
-                  </div>
-                </div>
-
-                <div className={`absolute inset-0 bg-primary/10 rounded-2xl transition-opacity duration-300 ${
-                  hoveredCard === index ? 'opacity-100' : 'opacity-0'
-                }`} />
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
 
