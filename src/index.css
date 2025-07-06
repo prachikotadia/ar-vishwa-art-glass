@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Brush+Script+MT&display=swap');
 
 @tailwind base;
@@ -118,26 +117,22 @@
 
   body {
     @apply bg-background text-foreground font-avenir transition-colors duration-300;
-    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Avenir', 'Helvetica', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  /* Typography Classes - All Avenir */
+  /* Typography Classes - All Avenir/Helvetica */
   .font-avenir {
-    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Avenir', 'Helvetica', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
+  /* Only for hero title - handwritten font */
   .font-handwritten {
     font-family: 'Brush Script MT', cursive;
   }
 
-  .font-brush {
-    font-family: 'Brush Script MT', cursive;
-    font-weight: 400;
-  }
-
   /* Special title styling for homepage */
   .hero-title-mixed {
-    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Avenir', 'Helvetica', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .hero-title-mixed .brush-text {
@@ -331,7 +326,7 @@
   .art-caption {
     text-align: center;
     margin: 0.5rem 0;
-    font-family: 'Avenir', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Avenir', 'Helvetica', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     color: hsl(var(--foreground));
     font-size: 0.9rem;
     font-weight: 500;

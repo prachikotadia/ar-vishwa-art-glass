@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,8 +16,6 @@ const CustomOrder = () => {
     size: '',
     deadline: '',
   });
-  const [files, setFiles] = useState<File[]>([]);
-  const [isDragOver, setIsDragOver] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState<string>('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -28,35 +27,7 @@ const CustomOrder = () => {
     setFormData(prev => ({ ...prev, size: value }));
   };
 
-  const handleFileUpload = (uploadedFiles: FileList | null) => {
-    if (uploadedFiles) {
-      const newFiles = Array.from(uploadedFiles);
-      setFiles(prev => [...prev, ...newFiles]);
-    }
-  };
-
-  const removeFile = (index: number) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-    handleFileUpload(e.dataTransfer.files);
-  };
-
   const generateMessage = () => {
-    const filesList = files.length > 0 ? `\nReference Images: ${files.map(f => f.name).join(', ')}` : '';
     return `🎨 Custom Art Order Request
 
 Name: ${formData.name}
@@ -68,7 +39,7 @@ ${formData.description}
 
 Details:
 • Size: ${formData.size || 'Not specified'}
-• Deadline: ${formData.deadline || 'Flexible'}${filesList}
+• Deadline: ${formData.deadline || 'Flexible'}
 
 Looking forward to creating something beautiful together!`;
   };
@@ -86,7 +57,7 @@ Looking forward to creating something beautiful together!`;
       whatsapp: `https://wa.me/+919313042798?text=${encodedMessage}`,
       instagram: `https://www.instagram.com/arvishwaartstudio/?igsh=MXMwNzVwam0wOTJ5OQ%3D%3D#`,
       sms: `sms:+919313042798${getSMSBodyParam()}body=${encodedMessage}`,
-      email: `mailto:arvishwaartstudio@gmail.com ?subject=${encodeURIComponent('Custom Art Order Request')}&body=${encodedMessage}`
+      email: `mailto:arvishwaartstudio@gmail.com?subject=${encodeURIComponent('Custom Art Order Request')}&body=${encodedMessage}`
     };
   };
 
@@ -128,7 +99,7 @@ Looking forward to creating something beautiful together!`;
       ];
     } else {
       return [
-        { platform: 'email', name: 'Email', icon: Mail, priority: 1, reason: 'Best for attachments' },
+        { platform: 'email', name: 'Email', icon: Mail, priority: 1, reason: 'Best for details' },
         { platform: 'whatsapp', name: 'WhatsApp', icon: MessageCircle, priority: 2, reason: 'WhatsApp Web' },
         { platform: 'instagram', name: 'Instagram', icon: Instagram, priority: 3, reason: 'Social engagement' },
         { platform: 'sms', name: 'SMS', icon: Smartphone, priority: 4, reason: 'Limited on desktop' }
@@ -142,10 +113,10 @@ Looking forward to creating something beautiful together!`;
     <section id="custom-order" className="py-20 bg-gradient-mesh">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-handwritten font-bold text-foreground mb-4">
+          <h2 className="text-4xl md:text-5xl font-avenir font-bold text-foreground mb-4">
             Custom Art Orders
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-avenir">
             Bring your vision to life with our custom art services
           </p>
         </div>
@@ -154,13 +125,13 @@ Looking forward to creating something beautiful together!`;
           {/* Left Side - Info & Examples */}
           <div className="space-y-8">
             <div className="glass rounded-2xl p-8">
-              <h3 className="text-2xl font-handwritten font-bold text-foreground mb-4">
+              <h3 className="text-2xl font-avenir font-bold text-foreground mb-4">
                 How It Works
               </h3>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="space-y-4 text-muted-foreground font-avenir">
                 <div className="flex items-start gap-3">
                   <span className="text-primary font-bold">1.</span>
-                  <p>Tell us your idea and share any reference images</p>
+                  <p>Tell us your idea and vision</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-primary font-bold">2.</span>
@@ -178,10 +149,10 @@ Looking forward to creating something beautiful together!`;
             </div>
 
             <div className="glass rounded-2xl p-8">
-              <h3 className="text-2xl font-handwritten font-bold text-foreground mb-4">
+              <h3 className="text-2xl font-avenir font-bold text-foreground mb-4">
                 What We Create
               </h3>
-              <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+              <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground font-avenir">
                 <div>• Custom Portraits</div>
                 <div>• Pet Paintings</div>
                 <div>• Wedding Art</div>
@@ -196,13 +167,13 @@ Looking forward to creating something beautiful together!`;
 
           {/* Right Side - Order Form */}
           <form className="glass rounded-2xl p-8 space-y-6">
-            <h3 className="text-2xl font-handwritten font-bold text-foreground mb-6">
+            <h3 className="text-2xl font-avenir font-bold text-foreground mb-6">
               Request Your Custom Art
             </h3>
 
             {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-foreground font-medium">
+              <Label htmlFor="name" className="text-foreground font-medium font-avenir">
                 Full Name *
               </Label>
               <Input
@@ -211,14 +182,14 @@ Looking forward to creating something beautiful together!`;
                 value={formData.name}
                 onChange={handleInputChange}
                 required
-                className="glass border-0 focus:ring-2 focus:ring-primary/50"
+                className="glass border-0 focus:ring-2 focus:ring-primary/50 font-avenir"
                 placeholder="Enter your full name"
               />
             </div>
 
             {/* Email */}
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-foreground font-medium">
+              <Label htmlFor="email" className="text-foreground font-medium font-avenir">
                 Email Address *
               </Label>
               <Input
@@ -228,14 +199,14 @@ Looking forward to creating something beautiful together!`;
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="glass border-0 focus:ring-2 focus:ring-primary/50"
+                className="glass border-0 focus:ring-2 focus:ring-primary/50 font-avenir"
                 placeholder="your.email@example.com"
               />
             </div>
 
             {/* Phone */}
             <div className="space-y-2">
-              <Label htmlFor="phone" className="text-foreground font-medium">
+              <Label htmlFor="phone" className="text-foreground font-medium font-avenir">
                 Phone Number (Optional)
               </Label>
               <Input
@@ -244,14 +215,14 @@ Looking forward to creating something beautiful together!`;
                 type="tel"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="glass border-0 focus:ring-2 focus:ring-primary/50"
+                className="glass border-0 focus:ring-2 focus:ring-primary/50 font-avenir"
                 placeholder="+1 (555) 123-4567"
               />
             </div>
 
             {/* Description */}
             <div className="space-y-2">
-              <Label htmlFor="description" className="text-foreground font-medium">
+              <Label htmlFor="description" className="text-foreground font-medium font-avenir">
                 Artwork Description *
               </Label>
               <Textarea
@@ -261,16 +232,16 @@ Looking forward to creating something beautiful together!`;
                 onChange={handleInputChange}
                 required
                 rows={4}
-                className="glass border-0 focus:ring-2 focus:ring-primary/50 resize-none"
+                className="glass border-0 focus:ring-2 focus:ring-primary/50 resize-none font-avenir"
                 placeholder="Describe your dream art piece... Include style, colors, mood, and any specific details"
               />
             </div>
 
             {/* Size */}
             <div className="space-y-2">
-              <Label className="text-foreground font-medium">Preferred Size</Label>
+              <Label className="text-foreground font-medium font-avenir">Preferred Size</Label>
               <Select onValueChange={handleSizeChange}>
-                <SelectTrigger className="glass border-0 focus:ring-2 focus:ring-primary/50">
+                <SelectTrigger className="glass border-0 focus:ring-2 focus:ring-primary/50 font-avenir">
                   <SelectValue placeholder="Select artwork size" />
                 </SelectTrigger>
                 <SelectContent>
@@ -286,7 +257,7 @@ Looking forward to creating something beautiful together!`;
 
             {/* Deadline */}
             <div className="space-y-2">
-              <Label htmlFor="deadline" className="text-foreground font-medium">
+              <Label htmlFor="deadline" className="text-foreground font-medium font-avenir">
                 Deadline (Optional)
               </Label>
               <Input
@@ -295,69 +266,13 @@ Looking forward to creating something beautiful together!`;
                 type="date"
                 value={formData.deadline}
                 onChange={handleInputChange}
-                className="glass border-0 focus:ring-2 focus:ring-primary/50"
+                className="glass border-0 focus:ring-2 focus:ring-primary/50 font-avenir"
               />
-            </div>
-
-            {/* File Upload */}
-            <div className="space-y-2">
-              <Label className="text-foreground font-medium">
-                Reference Images (Optional)
-              </Label>
-              <div
-                className={`glass rounded-lg border-2 border-dashed transition-all duration-300 ${
-                  isDragOver ? 'border-primary bg-primary/10' : 'border-muted-foreground/30'
-                }`}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-              >
-                <input
-                  type="file"
-                  multiple
-                  accept="image/*"
-                  onChange={(e) => handleFileUpload(e.target.files)}
-                  className="hidden"
-                  id="file-upload"
-                />
-                <label
-                  htmlFor="file-upload"
-                  className="block p-8 text-center cursor-pointer"
-                >
-                  <div className="text-4xl mb-4">📎</div>
-                  <p className="text-foreground font-medium mb-2">
-                    Drop your images here or click to upload
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    JPG, PNG files up to 10MB each
-                  </p>
-                </label>
-              </div>
-
-              {/* File List */}
-              {files.length > 0 && (
-                <div className="space-y-2">
-                  {files.map((file, index) => (
-                    <div key={index} className="flex items-center justify-between glass rounded-lg p-3">
-                      <span className="text-sm text-foreground truncate flex-1">
-                        📸 {file.name}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => removeFile(index)}
-                        className="text-destructive hover:text-destructive/80 ml-2"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
             {/* Platform Selection */}
             <div className="space-y-4">
-              <Label className="text-foreground font-medium">
+              <Label className="text-foreground font-medium font-avenir">
                 Choose Your Preferred Contact Method
               </Label>
               <div className="grid grid-cols-2 gap-3">
@@ -367,7 +282,7 @@ Looking forward to creating something beautiful together!`;
                     type="button"
                     variant="outline"
                     onClick={() => handlePlatformLaunch(platform)}
-                    className="glass hover-glass transition-all duration-300 h-auto p-4 flex flex-col items-center gap-2 group"
+                    className="glass hover-glass transition-all duration-300 h-auto p-4 flex flex-col items-center gap-2 group font-avenir"
                   >
                     <Icon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
                     <div className="text-center">
@@ -379,10 +294,10 @@ Looking forward to creating something beautiful together!`;
               </div>
             </div>
 
-            <div className="text-xs text-muted-foreground text-center space-y-1">
-              <p>📱 WhatsApp & SMS will open your messaging app</p>
-              <p>📧 Email will open your default email client</p>
-              <p>📷 Instagram will open direct messages (type manually)</p>
+            <div className="text-xs text-muted-foreground text-center space-y-1 font-avenir">
+              <p>WhatsApp & SMS will open your messaging app</p>
+              <p>Email will open your default email client</p>
+              <p>Instagram will open direct messages</p>
             </div>
           </form>
         </div>
