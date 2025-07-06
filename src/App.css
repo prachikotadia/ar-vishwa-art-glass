@@ -45,3 +45,11 @@
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
+
+body, html, .font-avenir, .font-sans, .font-avenir *, .font-sans * {
+  font-family: 'Avenir', 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', 'Segoe UI', sans-serif !important;
+}
+
+.font-handwritten {
+  font-family: 'Pacifico', 'Brush Script MT', cursive !important;
+}
