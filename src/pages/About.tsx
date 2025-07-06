@@ -25,7 +25,7 @@ const About = () => {
                 <img
                   src={halfPortrait}
                   alt="Half realistic, half painted creative portrait of AR Vishwa"
-                  className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                  className="w-full h-auto object-cover rounded-2xl shadow-2xl fade-mask"
                   loading="lazy"
                 />
               </div>
@@ -83,7 +83,7 @@ const About = () => {
                   <img
                     src={halfPortrait}
                     alt="Half realistic, half painted creative portrait of AR Vishwa"
-                    className="w-80 h-80 xl:w-96 xl:h-96 object-cover rounded-2xl shadow-2xl"
+                    className="w-80 h-80 xl:w-96 xl:h-96 object-cover rounded-2xl shadow-2xl fade-mask"
                     loading="lazy"
                   />
                   {/* Floating elements around portrait */}

@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { X, ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -263,9 +262,9 @@ const CategoryGallery = ({ searchQuery = '' }: CategoryGalleryProps) => {
                 onClick={() => handleCategoryClick(category.name)}
               >
                 {/* Folder Preview Images with better spacing */}
-                <div className="relative mb-4 h-48">
+                <div className="relative mb-4 h-40">
                   <div 
-                    className={`absolute top-0 left-0 w-full h-40 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
+                    className={`absolute top-0 left-0 w-full h-32 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
                       hoveredCard === index ? 'transform rotate-2 translate-x-2' : 'transform rotate-1'
                     }`}
                   >
@@ -277,7 +276,7 @@ const CategoryGallery = ({ searchQuery = '' }: CategoryGalleryProps) => {
                   </div>
                   
                   <div 
-                    className={`absolute top-4 right-0 w-full h-40 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
+                    className={`absolute top-8 right-4 w-full h-32 rounded-lg overflow-hidden transition-all duration-300 shadow-md ${
                       hoveredCard === index ? 'transform -rotate-2 -translate-x-2' : 'transform -rotate-1'
                     }`}
                   >

@@ -13,23 +13,7 @@ interface TimelineEvent {
 }
 
 const timelineEvents: TimelineEvent[] = [
-  {
-    id: '1',
-    year: 2010,
-    title: 'Bachelor of Fine Arts',
-    description: 'Government College of Arts, Mumbai - Specialized in Traditional and Contemporary Art',
-    category: 'education',
-    icon: GraduationCap
-  },
-  {
-    id: '2',
-    year: 2013,
-    title: 'First Solo Exhibition',
-    description: 'Mumbai Art Gallery - "Colors of Expression" featuring 25 original paintings',
-    category: 'exhibition',
-    icon: Palette,
-    featured: true
-  },
+ 
   {
     id: '3',
     year: 2015,
@@ -46,15 +30,7 @@ const timelineEvents: TimelineEvent[] = [
     category: 'education',
     icon: GraduationCap
   },
-  {
-    id: '5',
-    year: 2020,
-    title: 'Digital Art Innovation Award',
-    description: 'Recognized for pioneering work in mixed media and digital art integration',
-    category: 'award',
-    icon: Award,
-    featured: true
-  },
+
   {
     id: '6',
     year: 2022,
